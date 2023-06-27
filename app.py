@@ -13,12 +13,12 @@ pl = Pipline(tokenizer)
 
 
 @app.post("/uploadfile/")
-async def create_upload_file(file: UploadFile):
+async def create_upload_file(file: UploadFile, score: float):
     input_texts_df = pd.read_csv(file.file, sep="\t")
     try:
         texts = list(input_texts_df.iloc[:, 0])
         stream = io.StringIO()
-        unique_texts = pl.duplidelete(texts, 0.8)
+        unique_texts = pl.duplidelete(texts, score)
         unique_texts_df = pd.DataFrame(unique_texts, columns=["texts"])
         unique_texts_df.to_csv(stream, index=False)
         response = StreamingResponse(iter([stream.getvalue()]),
