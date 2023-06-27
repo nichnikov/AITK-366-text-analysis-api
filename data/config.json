@@ -1,0 +1,5 @@
+{
+  "service_host": "0.0.0.0",
+  "service_port": 8080,
+  "stopwords_files": ["greetings.csv", "stopwords.csv"]
+  }
